@@ -4,7 +4,7 @@ R Shiny application using data from the Consumer Financial Protection Bureau
 Links to shinyapps.io webpages: https://mwatson717.shinyapps.io/CFPB/
                                 https://mwatson717.shinyapps.io/CFPB_LDA/
 
-Contents:
+# Contents:
 
 * app.R: R Shiny application containing both UI and Server
 
@@ -14,7 +14,7 @@ Contents:
 
 * map2.csv: Data used for the second map on second panel, contains output of LDA as column 'LDA_Topic'
 
-LDA Folder:
+## LDA Folder:
 
 * app.R: R shiny application dispalying output of LDA model through the LDAviz package
 
