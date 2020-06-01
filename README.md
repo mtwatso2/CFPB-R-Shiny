@@ -1,5 +1,5 @@
 # CFPB-R-Shiny
-R Shiny application using data from the Consumer Financial Protection Bureau 
+R Shiny applications using data from the Consumer Financial Protection Bureau 
 
 Links to shinyapps.io webpages: https://mwatson717.shinyapps.io/CFPB/ ,
                                 https://mwatson717.shinyapps.io/CFPB_LDA/
