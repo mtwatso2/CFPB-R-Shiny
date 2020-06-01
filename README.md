@@ -1,6 +1,8 @@
 # CFPB-R-Shiny
 R Shiny applications using data from the Consumer Financial Protection Bureau 
 
+You can download the data here: https://www.consumerfinance.gov/data-research/consumer-complaints/
+
 Links to shinyapps.io webpages: https://mwatson717.shinyapps.io/CFPB/ ,
                                 https://mwatson717.shinyapps.io/CFPB_LDA/
 
