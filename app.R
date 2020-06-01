@@ -13,7 +13,7 @@ library(plotly)
 library(dplyr)
 library(reshape2)
 
-cfpb <- read.csv("panel1.csv") #read.csv("data2.csv")
+cfpb <- read.csv("panel1.csv") 
 cfpb$Year <- factor(cfpb$Year)
 cfpb[cfpb == 0] <- NA
 
@@ -23,12 +23,16 @@ mbData$Year <- factor(mbData$Year)
 mbData_melt <- melt(mbData, id = c("State", "Year", "Company"))
 mbData_melt <- mbData_melt[!(mbData_melt$variable == "Total"),]
 
+newComp <- read.csv('map2.csv')
+newComp$Year <- factor(newComp$Year)
+
 # Define UI for application that displays plots
 ui <- fluidPage(
   
   tabsetPanel(
     
-    tabPanel("Complaint Counts", "CFPB Database: Data was downloaded on May 7, 2020", 
+    tabPanel("Complaint Counts", "CFPB Database: Data was downloaded on May 7, 2020",  
+             helpText(a("Click here to see LDA Visualization", href = "https://mwatson717.shinyapps.io/CFPB_LDA/")),
              
              titlePanel( "Complaint Counts"),
              
@@ -73,46 +77,59 @@ ui <- fluidPage(
     
     tabPanel("Map", "Note: Some combinations of Year and Company will return null values as there were no complaints for that given Company during that given Year",
              titlePanel("Map"),
-             
-             sidebarLayout(
-               sidebarPanel(
-                 varSelectizeInput("complaints",
-                                   "Complaint Type: (Only affects Map)",
-                                   mbData[, 4:13],
-                                   selected = "Total",
-                                   multiple = FALSE),
-               
-                 selectizeInput("years",
-                               "Select Year:",
-                               levels(mbData$Year),
-                               selected = "All",
-                               multiple = FALSE),
-                 
-                 selectizeInput("state",
-                                "Select a State: (Only affects Bar Chart)",
-                                levels(mbData$State),
-                                selected = "CA",
-                                multiple = FALSE),
-                 
-                 selectizeInput("comp",
-                                "Select a Company: (Only top 10 most frequent complaints)",
-                                levels(mbData$Company),
-                                selected = "All",
-                                multiple = FALSE)
-                 
-               ),
-               
-               mainPanel(
-                 textOutput("year"),
-                 plotlyOutput("mapPlot"),
-                 textOutput("state"),
-                 plotlyOutput("statePlot")
-               ) #ends mainpanel
-             ) #ends side bar layout
-    )#ends second panel
-    
-  )#ends tab panel
-) #ends UI
+             fluidRow(column(4,
+                             selectizeInput("years",
+                                            "Select Year: (Does not affect right map)",
+                                            levels(mbData$Year),
+                                            selected = "All",
+                                            multiple = FALSE),
+                             
+                             selectizeInput("comp",
+                                            "Select a Company: (Only top 10 most frequent complaints, does not affect right map)",
+                                            levels(mbData$Company),
+                                            selected = "All",
+                                            multiple = FALSE),
+                             
+                             selectizeInput("state",
+                                            "Select a State: (Only affects Bar Chart)",
+                                            levels(mbData$State),
+                                            selected = "IL",
+                                            multiple = FALSE),
+                             
+                             varSelectizeInput("complaints",
+                                               "Complaint Type: (Only affects left map)",
+                                               mbData[, 4:13],
+                                               selected = "Total",
+                                               multiple = FALSE),
+                             
+                             varSelectizeInput("ldaComp",
+                                               "New Complaint Type: (Only affects right map)",
+                                               newComp[, 3:6],
+                                               selected = "Total",
+                                               multiple = FALSE),
+                             
+                             selectizeInput("ldaYear",
+                                            "Select Year: (Only affects right map)",
+                                            levels(newComp$Year),
+                                            selected = 'All',
+                                            multiple = FALSE)
+             ), #ends column1
+             column(8,
+                    textOutput("state"),
+                    plotlyOutput("statePlot"),)
+             ),# ends fluidrow
+             fluidRow(column(6,
+                             plotlyOutput("mapPlot"),
+                             textOutput("year")),
+                      column(6,
+                             plotlyOutput("map2Plot"),
+                             textOutput("map2"))
+             )# ends fluid row
+    ) #ends tab panel
+  )#ends tabset panel
+  
+)#ends UI
+
 
 # Define server logic required to draw a histogram
 server <- function(input, output, session) {
@@ -153,7 +170,6 @@ server <- function(input, output, session) {
       lakecolor = toRGB('white')
     )
     
-    #fig <- plot_geo(mapData, locationmode = 'USA-states')
     fig <- plot_geo(mbData_ss, locationmode = 'USA-states')
     fig <- fig %>% add_trace(
       z = mbData_ss[[input$complaints]], locations = ~State,
@@ -162,6 +178,31 @@ server <- function(input, output, session) {
     fig <- fig %>% colorbar(title = "Number of complaints")
     fig <- fig %>% layout(
       title = 'Number of Complaints by State',
+      geo = g
+    )
+    
+    fig
+    
+  }) #ends mapPlot
+  
+  output$map2Plot <- renderPlotly({
+    
+    lda_ss = subset(newComp, newComp$Year == input$ldaYear)
+    g <- list(
+      scope = 'usa',
+      projection = list(type = 'albers usa'),
+      showlakes = TRUE,
+      lakecolor = toRGB('white')
+    )
+    
+    fig <- plot_geo(lda_ss, locationmode = 'USA-states')
+    fig <- fig %>% add_trace(
+      z = lda_ss[[input$ldaComp]], locations = ~State,
+      color = lda_ss[[input$ldaComp]], colors = 'Spectral'
+    )
+    fig <- fig %>% colorbar(title = "Number of Complaints")
+    fig <- fig %>% layout(
+      title = 'Number of complaints for LDA Topics by State',
       geo = g
     )
     
@@ -187,11 +228,15 @@ server <- function(input, output, session) {
   })
   
   output$year <- renderText({
-    paste("Showing data from year(s):", input$years, "and Complaint Type:", input$complaints)
+    paste("Showing data from year(s):", input$years, "and Complaint Type:", input$complaints, "and Company:", input$comp)
   })
   
   output$state <- renderText({
-    paste("Showing data for the State:", input$state, "and year(s):", input$years)
+    paste("Showing data for the State:", input$state, "and year(s):", input$years, "and Company:", input$comp)
+  })
+  
+  output$map2 <- renderText({
+    paste("Showing data from year(s):", input$ldaYear, "and LDA topic:", input$ldaComp, "(Note: only 5,000 observations used in LDA model)")
   })
 } #ends server
 
