@@ -5,17 +5,17 @@ Created on Sun May 17 17:05:57 2020
 @author: MWatson717
 """
 
-#Code for Project Milestone
+#Code for Final Project
 
 import pandas as pd
 import matplotlib.pyplot as plt
 import operator
 
 
-p = pd.read_csv('complaints2.csv')
+p = pd.read_csv('complaints3.csv')
 
 
-####### 5/28 Lookikng at companies??? ###############
+####### Data for Line/Bar Plots: Year=All ###############
 
 p['Company'].value_counts()[:10].sum()
 
@@ -52,7 +52,7 @@ vars_to_drop = ['Credit card', 'Prepaid card', 'Bank account or service', 'Consu
 
 c2 = c2.drop(columns = vars_to_drop)
 
-######### Data for Line/Bar plots #############
+######### Data for Line/Bar plots: Company=All #############
 
 time = p[['Date received', 'Product']]
 
@@ -85,7 +85,8 @@ c2 = c2.append(time2)
 
 c2 = c2.fillna("All")
 
-#c2.to_csv('panel1.csv', index=False)
+#c2.to_csv('panel1a.csv', index=False)
+
 
 
 ######## Data for Map visualization: All Years/Companies ###########
@@ -113,7 +114,7 @@ mapData = mapData.reset_index()
 mapData['State'] = mapData['State'].astype(str)
 
 
-#######Data for Map and Bar chart
+####### Data for Map and Bar chart: Company = All #####
 
 p['Year'] = pd.DatetimeIndex(p['Date received']).year
 
@@ -144,7 +145,7 @@ mbData = mbData.append(mapData)
 mbData = mbData.fillna("All")
 
 
-###### Data for companies ###########
+###### Data for Map and Bar chart: Year = All ###########
 p2['Year'] = pd.DatetimeIndex(p2['Date received']).year
 
 cd = pd.crosstab([p2.State, p2.Company, p2.Year], p2.Product)
@@ -198,9 +199,7 @@ cd = cd.append(mbData)
 
 cd = cd.fillna("All")
 
-cd = cd.drop('Virtual currency', axis=1)
-
-#cd.to_csv('panel2.csv', index=False)
+#cd.to_csv('panel2a.csv', index=False)
 
 
 
@@ -234,4 +233,3 @@ lda_ct2 = lda_ct2.reset_index()
 lda3 = lda_ct1.append(lda_ct2)
 
 #lda3.to_csv('map2.csv', index = False)
-
