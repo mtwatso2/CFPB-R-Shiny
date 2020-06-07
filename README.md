@@ -12,7 +12,11 @@ Links to shinyapps.io webpages: https://mwatson717.shinyapps.io/CFPB/ ,
 
 * panel1.csv: Data used for the first panel, creating ggplot line and bar charts (Data Downloaded on May 7th)
 
+* panel1a.csv: Data used for the first panel, creating ggplot line and bar charts (Data Downloaded on June 7th)
+
 * panel2.csv: Data used for the second panel, creating a Plotly Map and bar chart (Data Downloaded on May 7th)
+
+* panel2a.csv: Data used for the second panel, creating a Plotly Map and bar chart (Data Downloaded on June 7th)
 
 * map2.csv: Data used for the second map on second panel, contains output of LDA as column 'LDA_Topic'
 
