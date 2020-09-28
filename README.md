@@ -16,6 +16,8 @@ Links to shinyapps.io webpages: https://mwatson717.shinyapps.io/CFPB/ ,
 
 * map2.csv: Data used for the second map on second panel, contains output of LDA as column 'LDA_Topic' (Data Downloaded on September 28th)
 
+* data_preprocessing.py: Python file used for data preprocessing
+
 ## LDA Folder:
 
 * app.R: R shiny application dispalying output of LDA model through the LDAviz package
