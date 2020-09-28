@@ -8,11 +8,8 @@ Created on Sun May 17 17:05:57 2020
 #Code for Final Project
 
 import pandas as pd
-import matplotlib.pyplot as plt
-import operator
 
-
-p = pd.read_csv('complaints3.csv')
+p = pd.read_csv('complaints-9-28.csv')
 
 
 ####### Data for Line/Bar Plots: Year=All ###############
@@ -52,6 +49,7 @@ vars_to_drop = ['Credit card', 'Prepaid card', 'Bank account or service', 'Consu
 
 c2 = c2.drop(columns = vars_to_drop)
 
+
 ######### Data for Line/Bar plots: Company=All #############
 
 time = p[['Date received', 'Product']]
@@ -85,8 +83,7 @@ c2 = c2.append(time2)
 
 c2 = c2.fillna("All")
 
-#c2.to_csv('panel1a.csv', index=False)
-
+#c2.to_csv('panel1-9-28.csv', index=False)
 
 
 ######## Data for Map visualization: All Years/Companies ###########
@@ -199,8 +196,7 @@ cd = cd.append(mbData)
 
 cd = cd.fillna("All")
 
-#cd.to_csv('panel2a.csv', index=False)
-
+#cd.to_csv('panel2-9-28.csv', index=False)
 
 
 ############# Data with new categories for complaint type #################
@@ -232,4 +228,4 @@ lda_ct2 = lda_ct2.reset_index()
 
 lda3 = lda_ct1.append(lda_ct2)
 
-#lda3.to_csv('map2.csv', index = False)
+#lda3.to_csv('map2-9-28.csv', index = False)
