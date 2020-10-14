@@ -31,7 +31,7 @@ ui <- fluidPage(
   
   tabsetPanel(
     
-    tabPanel("Complaint Counts", "CFPB Database: Data was downloaded on May 7, 2020",  
+    tabPanel("Complaint Counts", "CFPB Database: Data was downloaded on September 28, 2020",  
              helpText(a("Click here to see LDA Visualization", href = "https://mwatson717.shinyapps.io/CFPB_LDA/")),
              
              titlePanel( "Complaint Counts"),
