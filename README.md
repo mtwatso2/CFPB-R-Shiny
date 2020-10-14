@@ -12,9 +12,9 @@ Links to shinyapps.io webpages: https://mwatson717.shinyapps.io/CFPB/ ,
 
 * panel1-9-28.csv: Data used for the first panel, creating ggplot line and bar charts (Data Downloaded on September 28th)
 
-* panel2.csv: Data used for the second panel, creating a Plotly Map and bar chart (Data Downloaded on September 28th)
+* panel2-9-28.csv: Data used for the second panel, creating a Plotly Map and bar chart (Data Downloaded on September 28th)
 
-* map2.csv: Data used for the second map on second panel, contains output of LDA as column 'LDA_Topic' (Data Downloaded on September 28th)
+* map2-9-28.csv: Data used for the second map on second panel, contains output of LDA as column 'LDA_Topic' (Data Downloaded on September 28th)
 
 * data_preprocessing.py: Python file used for data preprocessing
 
