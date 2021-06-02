@@ -23,3 +23,4 @@ Links to shinyapps.io webpages: https://mwatson717.shinyapps.io/CFPB/ ,
 * app.R: R shiny application dispalying output of LDA model through the LDAviz package
 
 * LDA2.html: output of LDAviz
+ 
