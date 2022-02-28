@@ -10,11 +10,11 @@ Links to shinyapps.io webpages: https://mwatson717.shinyapps.io/CFPB/ ,
 
 * app.R: R Shiny application containing both UI and Server
 
-* panel1-6-2-21.csv: Data used for the first panel, creating ggplot line and bar charts (Data Downloaded on June 2nd 2021)
+* panel1-2-28-22.csv: Data used for the first panel, creating ggplot line and bar charts (Data Downloaded on February 28, 2022)
 
-* panel2-6-2-21.csv: Data used for the second panel, creating a Plotly Map and bar chart (Data Downloaded on June 2nd 2021)
+* panel2-2-28-22.csv: Data used for the second panel, creating a Plotly Map and bar chart (Data Downloaded on February 28, 2022)
 
-* map2-6-2-21.csv: Data used for the second map on second panel, contains output of LDA as column 'LDA_Topic' (Data Downloaded on June 2nd 2021)
+* map2-2-28-22.csv: Data used for the second map on second panel, contains output of LDA as column 'LDA_Topic' (Data Downloaded on February 28, 2022)
 
 * data_preprocessing.py: Python file used for data preprocessing
 
