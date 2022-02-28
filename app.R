@@ -13,17 +13,17 @@ library(plotly)
 library(dplyr)
 library(reshape2)
 
-cfpb <- read.csv("panel1-6-2-21.csv") 
+cfpb <- read.csv("panel1-2-28-22.csv") 
 cfpb$Year <- factor(cfpb$Year)
 cfpb[cfpb == 0] <- NA
 
-mbData <- read.csv("panel2-6-2-21.csv")
+mbData <- read.csv("panel2-2-28-22.csv")
 mbData$Year <- factor(mbData$Year)
 
 mbData_melt <- melt(mbData, id = c("State", "Year", "Company"))
 mbData_melt <- mbData_melt[!(mbData_melt$variable == "Total"),]
 
-newComp <- read.csv('map2-6-2-21.csv')
+newComp <- read.csv('map2-2-28-22.csv')
 newComp$Year <- factor(newComp$Year)
 
 # Define UI for application that displays plots
@@ -31,7 +31,7 @@ ui <- fluidPage(
   
   tabsetPanel(
     
-    tabPanel("Complaint Counts", "CFPB Database: Data was downloaded on June 2, 2021",  
+    tabPanel("Complaint Counts", "CFPB Database: Data was downloaded on February 28, 2022",  
              helpText(a("Click here to see LDA Visualization", href = "https://mwatson717.shinyapps.io/CFPB_LDA/")),
              
              titlePanel( "Complaint Counts"),
