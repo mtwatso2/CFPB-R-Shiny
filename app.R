@@ -13,17 +13,17 @@ library(plotly)
 library(dplyr)
 library(reshape2)
 
-cfpb <- read.csv("panel1-8-29-22.csv") 
+cfpb <- read.csv("panel1-12-21-22.csv") 
 cfpb$Year <- factor(cfpb$Year)
 cfpb[cfpb == 0] <- NA
 
-mbData <- read.csv("panel2-8-29-22.csv")
+mbData <- read.csv("panel2-12-21-22.csv")
 mbData$Year <- factor(mbData$Year)
 
 mbData_melt <- melt(mbData, id = c("State", "Year", "Company"))
 mbData_melt <- mbData_melt[!(mbData_melt$variable == "Total"),]
 
-newComp <- read.csv('map2-8-29-22.csv')
+newComp <- read.csv('map2-12-21-22.csv')
 newComp$Year <- factor(newComp$Year)
 
 # Define UI for application that displays plots
