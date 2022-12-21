@@ -9,7 +9,7 @@ Created on Sun May 17 17:05:57 2020
 
 import pandas as pd
 
-p = pd.read_csv('complaints-8-29-22.csv')
+p = pd.read_csv('complaints-12-21-22.csv')
 
 
 ####### Data for Line/Bar Plots: Year=All ###############
@@ -83,7 +83,7 @@ c2 = c2.append(time2)
 
 c2 = c2.fillna("All")
 
-c2.to_csv('panel1-8-29-22.csv', index=False)
+c2.to_csv('panel1-12-21-22.csv', index=False)
 
 
 ######## Data for Map visualization: All Years/Companies ###########
@@ -196,7 +196,7 @@ cd = cd.append(mbData)
 
 cd = cd.fillna("All")
 
-cd.to_csv('panel2-8-29-22.csv', index=False)
+cd.to_csv('panel2-12-21-22.csv', index=False)
 
 
 ############# Data with new categories for complaint type #################
@@ -228,4 +228,4 @@ lda_ct2 = lda_ct2.reset_index()
 
 lda3 = lda_ct1.append(lda_ct2)
 
-lda3.to_csv('map2-8-29-22.csv', index = False)
+lda3.to_csv('map2-12-21-22.csv', index = False)
