@@ -84,8 +84,8 @@ panel2 = data2.groupby(by=['Year', 'State', 'Product'], as_index=False).agg(Coun
 
 panel3 = data2.groupby(by=['Year', 'Company', 'Product'], as_index=False).agg(Count=('Product', 'count'))
 
-
-
-
+panel1.to_csv('panel1.csv', index=False)
+panel2.to_csv('panel2.csv', index=False)
+panel3.to_csv('panel3.csv', index=False)
 
 data.to_csv('CFPB_pbi_32823.csv', index=False)
